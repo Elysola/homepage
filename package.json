@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "npx vue-tsc --noEmit",
+    "typecheck": "nuxt prepare && vue-tsc --noEmit",
     "test:smoke": "node tests/smoke.mjs",
     "test:e2e": "playwright test",
     "deploy": "wrangler deploy"
