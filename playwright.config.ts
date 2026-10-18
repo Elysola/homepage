@@ -10,12 +10,16 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || 'http://127.0.0.1:3000',
     trace: 'on-first-retry',
   },
-  webServer: {
-    command: 'bun run dev --host 127.0.0.1 --port 3000',
-    url: 'http://127.0.0.1:3000',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-  },
+  ...(process.env.BASE_URL
+    ? {}
+    : {
+        webServer: {
+          command: 'bun run dev --host 127.0.0.1 --port 3000',
+          url: 'http://127.0.0.1:3000',
+          reuseExistingServer: !process.env.CI,
+          timeout: 120_000,
+        },
+      }),
   projects: [
     { name: 'desktop-light', use: { ...devices['Desktop Chrome'], colorScheme: 'light' } },
     { name: 'desktop-dark', use: { ...devices['Desktop Chrome'], colorScheme: 'dark' } },

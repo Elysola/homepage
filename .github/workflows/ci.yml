@@ -26,16 +26,29 @@ jobs:
         run: bun run lint
       - name: Build
         run: bun run build
-      - name: Start preview server
+      - name: Start Cloudflare Pages preview
         run: |
-          bun run preview --host 127.0.0.1 --port 4173 \
+          bunx wrangler pages dev dist \
+            --ip 127.0.0.1 \
+            --port 4173 \
+            --show-interactive-dev-session=false \
             > /tmp/elysola-preview.log 2>&1 &
+          echo $! > /tmp/elysola-preview.pid
       - name: Wait for preview
         run: |
           attempts=0
           until curl --fail --silent http://127.0.0.1:4173 >/dev/null; do
+            if ! kill -0 "$(cat /tmp/elysola-preview.pid)" 2>/dev/null; then
+              echo 'Cloudflare Pages preview exited unexpectedly:'
+              cat /tmp/elysola-preview.log
+              exit 1
+            fi
             attempts=$((attempts + 1))
-            [ "$attempts" -ge 30 ] && exit 1
+            if [ "$attempts" -ge 60 ]; then
+              echo 'Timed out waiting for Cloudflare Pages preview:'
+              cat /tmp/elysola-preview.log
+              exit 1
+            fi
             sleep 2
           done
       - name: Smoke test
