@@ -10,13 +10,13 @@ export interface ProjectRecord {
 
 // Checked-in fallback data keeps the projects page useful when GitHub is unavailable.
 export const fallbackProjects: ProjectRecord[] = [
-  { name: 'WebHooker', description: 'GitHub webhook → Discord dispatcher。通过 Cloudflare Workers 接收 webhook 事件，应用过滤并路由格式化消息到 Discord channels 或 threads。', url: 'https://github.com/Elysola/WebHooker', language: 'TypeScript', stars: 6, topics: [], homepage: 'https://webhooker.docs.worldexecute.me/' },
+  { name: 'WebHooker', description: 'GitHub webhook → Discord dispatcher。通过 Cloudflare Workers 接收 webhook 事件，应用过滤并路由格式化消息到 Discord channels 或 threads。', url: 'https://github.com/Elysola/WebHooker', language: 'TypeScript', stars: 6, topics: [], homepage: 'https://webhooker.docs.elysola.org/' },
   { name: 'Shit-Bot', description: '自动监控 X/Twitter 用户发帖，通过 Discord/Telegram Bot 推送到群组/频道。支持关键词过滤、媒体过滤、推文渲染为图片、多管理员审批机制。', url: 'https://github.com/Elysola/Shit-Bot', language: 'TypeScript', stars: 4, topics: [], homepage: '' },
   { name: 'SleepyXposed', description: '基于 Xposed 模块的 Sleepy 客户端', url: 'https://github.com/Elysola/SleepyXposed', language: 'Kotlin', stars: 4, topics: [], homepage: '' },
   { name: 'Mailer', description: '一个小型 Go 守护进程：定期检查一个或多个邮箱的新邮件，并将通知推送到 Telegram 和/或 Discord 机器人。', url: 'https://github.com/Elysola/Mailer', language: 'Go', stars: 3, topics: [], homepage: '' },
   { name: 'icon', description: 'Elysola 品牌图标：SVG 与多尺寸 PNG 构建', url: 'https://github.com/Elysola/icon', language: 'Python', stars: 2, topics: [], homepage: '' },
-  { name: 'docs', description: '', url: 'https://github.com/Elysola/docs', language: 'MDX', stars: 2, topics: [], homepage: 'https://docs.worldexecute.me/' },
-  { name: 'x-to-img', description: '将 X/Twitter 推文转换为 PNG 图片的 API 服务。基于 Hono + Satori 构建，支持部署到 Cloudflare Workers / Deno Deploy / Bun。', url: 'https://github.com/Elysola/x-to-img', language: 'TypeScript', stars: 2, topics: [], homepage: '' },
-  { name: 'icon-showcase', description: 'ReCloud icon showcase site', url: 'https://github.com/Elysola/icon-showcase', language: 'Vue', stars: 1, topics: [], homepage: 'https://icon.worldexecute.me/' },
+  { name: 'docs', description: '', url: 'https://github.com/Elysola/docs', language: 'MDX', stars: 2, topics: [], homepage: 'https://docs.elysola.org/' },
+  { name: 'x-to-img', description: '将 X/Twitter 推文转换为 PNG 图片的 API 服务。基于 Hono + Satori 构建，支持部署到 Cloudflare Workers / Deno Deploy / Bun。', url: 'https://github.com/siiway/x-to-img', language: 'TypeScript', stars: 2, topics: [], homepage: '' },
+  { name: 'icon-showcase', description: 'Elysola icon showcase site', url: 'https://github.com/Elysola/icon-showcase', language: 'Vue', stars: 1, topics: [], homepage: 'https://icon.elysola.org/' },
   { name: 'homepage', description: '', url: 'https://github.com/Elysola/homepage', language: 'Vue', stars: 1, topics: [], homepage: '' },
 ]

@@ -6,7 +6,7 @@
     "language": "TypeScript",
     "stars": 6,
     "topics": [],
-    "homepage": "https://webhooker.docs.worldexecute.me/"
+    "homepage": "https://webhooker.docs.elysola.org/"
   },
   {
     "name": "Shit-Bot",
@@ -51,12 +51,12 @@
     "language": "MDX",
     "stars": 2,
     "topics": [],
-    "homepage": "https://docs.worldexecute.me/"
+    "homepage": "https://docs.elysola.org/"
   },
   {
     "name": "x-to-img",
     "description": "将 X/Twitter 推文转换为 PNG 图片的 API 服务。基于 Hono + Satori 构建，支持部署到 Cloudflare Workers / Deno Deploy / Bun。",
-    "url": "https://github.com/Elysola/x-to-img",
+    "url": "https://github.com/siiway/x-to-img",
     "language": "TypeScript",
     "stars": 2,
     "topics": [],
@@ -64,12 +64,12 @@
   },
   {
     "name": "icon-showcase",
-    "description": "ReCloud icon showcase site",
+    "description": "Elysola icon showcase site",
     "url": "https://github.com/Elysola/icon-showcase",
     "language": "Vue",
     "stars": 1,
     "topics": [],
-    "homepage": "https://icon.worldexecute.me/"
+    "homepage": "https://icon.elysola.org/"
   },
   {
     "name": "homepage",
