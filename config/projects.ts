@@ -16,7 +16,7 @@ export const fallbackProjects: ProjectRecord[] = [
   { name: 'Mailer', description: '一个小型 Go 守护进程：定期检查一个或多个邮箱的新邮件，并将通知推送到 Telegram 和/或 Discord 机器人。', url: 'https://github.com/Elysola/Mailer', language: 'Go', stars: 3, topics: [], homepage: '' },
   { name: 'icon', description: 'Elysola 品牌图标：SVG 与多尺寸 PNG 构建', url: 'https://github.com/Elysola/icon', language: 'Python', stars: 2, topics: [], homepage: '' },
   { name: 'docs', description: '', url: 'https://github.com/Elysola/docs', language: 'MDX', stars: 2, topics: [], homepage: 'https://docs.elysola.org/' },
-  { name: 'x-to-img', description: '将 X/Twitter 推文转换为 PNG 图片的 API 服务。基于 Hono + Satori 构建，支持部署到 Cloudflare Workers / Deno Deploy / Bun。', url: 'https://github.com/siiway/x-to-img', language: 'TypeScript', stars: 2, topics: [], homepage: '' },
+  { name: 'x-to-img', description: '将 X/Twitter 推文转换为 PNG 图片的 API 服务。基于 Hono + Satori 构建，支持部署到 Cloudflare Workers / Deno Deploy / Bun。', url: 'https://github.com/Elysola/x-to-img', language: 'TypeScript', stars: 2, topics: [], homepage: '' },
   { name: 'icon-showcase', description: 'Elysola icon showcase site', url: 'https://github.com/Elysola/icon-showcase', language: 'Vue', stars: 1, topics: [], homepage: 'https://icon.elysola.org/' },
   { name: 'homepage', description: '', url: 'https://github.com/Elysola/homepage', language: 'Vue', stars: 1, topics: [], homepage: '' },
 ]

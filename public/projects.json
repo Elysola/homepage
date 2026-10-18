@@ -56,7 +56,7 @@
   {
     "name": "x-to-img",
     "description": "将 X/Twitter 推文转换为 PNG 图片的 API 服务。基于 Hono + Satori 构建，支持部署到 Cloudflare Workers / Deno Deploy / Bun。",
-    "url": "https://github.com/siiway/x-to-img",
+    "url": "https://github.com/Elysola/x-to-img",
     "language": "TypeScript",
     "stars": 2,
     "topics": [],
