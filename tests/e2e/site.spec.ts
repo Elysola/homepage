@@ -8,7 +8,7 @@ for (const path of pages) {
     await page.goto(path)
     await expect(page.locator('main')).toBeVisible()
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', /elysola\.org/)
-    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /\/_og\/.+\.png/)
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /https:\/\/elysola\.org\/_og\/.+\.png/)
   })
 }
 

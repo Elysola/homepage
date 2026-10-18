@@ -12,7 +12,7 @@ export function usePageSeo({ title, description, type = 'website', image, jsonLd
   const route = useRoute()
   const { locale } = useI18n()
   const canonical = computed(() => new URL(route.path, 'https://elysola.org').toString())
-  const ogImage = computed(() => image || `https://elysola.org/og/image.png?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`)
+  const ogImage = computed(() => image || 'https://elysola.org/_og/s/c_Default.takumi,title_Elysola.png')
 
   useHead(() => ({
     title,
