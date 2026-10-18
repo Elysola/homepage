@@ -2,46 +2,53 @@
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { members } = useMembers()
+const failedAvatars = ref(new Set<string>())
 
-useHead({
-  title: `${t('team.title')} — ReCloud Studio`,
-})
+function markAvatarFailed(slug: string) {
+  failedAvatars.value = new Set(failedAvatars.value).add(slug)
+}
 
-defineOgImage('OgImageDefault.takumi', {
-  title: t('team.title', 'en'),
-  description: t('team.subtitle', 'en'),
-  fonts: ogFonts(),
+usePageSeo({
+  title: t('team.title'),
+  description: t('team.subtitle'),
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: t('team.title'),
+    description: t('team.subtitle'),
+    url: 'https://elysola.org/team',
+  },
 })
+defineOgImage('Default.takumi', { title: t('team.title', 'en'), description: t('team.subtitle', 'en') })
 </script>
 
 <template>
-  <section class="relative z-10 mx-auto flex min-h-[calc(100vh-5rem)] max-w-6xl flex-col items-center justify-center px-6 py-32">
-    <div class="mb-16 text-center animate-fade-up" style="animation-delay: 0.1s">
-      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-zinc-900 dark:text-white">{{ t('team.title') }}</h2>
-      <p class="mt-3 text-zinc-600 dark:text-zinc-500">{{ t('team.subtitle') }}</p>
-    </div>
-    <div v-if="members.length === 0" class="text-center text-zinc-500">
-      {{ t('team.empty') }}
-    </div>
-    <div v-else class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      <NuxtLink
-        v-for="(m, i) in members"
-        :key="i"
-        :to="localePath({ name: 'team-slug', params: { slug: m.slug } })"
-        class="animate-fade-up group flex flex-col items-center rounded-2xl border border-transparent px-6 py-10 text-center transition-all duration-300 hover:-translate-y-1 hover:border-zinc-200 hover:bg-zinc-100 hover:shadow-lg dark:hover:border-zinc-800 dark:hover:bg-zinc-900/50 dark:hover:shadow-zinc-900/30"
-        :style="{ animationDelay: `${0.15 + i * 0.1}s` }"
-      >
-        <div v-if="m.github" class="h-20 w-20">
-          <img
-            :src="useAvatarUrl(m.github)"
-            :alt="m.name"
-            class="h-20 w-20 rounded-full bg-zinc-200 ring-2 ring-teal-500/20 transition-all duration-300 group-hover:ring-teal-500/40 group-hover:scale-105 dark:bg-zinc-800"
-          />
-        </div>
-        <h3 class="mt-5 text-lg font-semibold transition-colors group-hover:text-zinc-900 dark:group-hover:text-white">{{ m.name }}</h3>
-        <p class="mt-1 text-sm text-teal-600 dark:text-teal-400/80">{{ m.role }}</p>
-        <p class="mt-3 max-w-xs text-sm leading-relaxed text-zinc-600 dark:text-zinc-500">&ldquo;{{ m.motto }}&rdquo;</p>
-      </NuxtLink>
-    </div>
-  </section>
+  <main class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <header class="page-header flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="page-eyebrow">People</p>
+        <h1 class="page-title">{{ t('team.title') }}</h1>
+        <p class="page-summary">{{ t('team.subtitle') }}</p>
+      </div>
+      <p v-if="members.length" class="text-sm text-muted"><span class="font-mono font-medium tabular-nums text-primary">{{ members.length }}</span> contributors</p>
+    </header>
+
+    <div v-if="!members.length" class="empty-state mt-8">{{ t('team.empty') }}</div>
+    <ul v-else class="mt-8 grid gap-4 md:grid-cols-2">
+      <li v-for="member in members" :key="member.slug">
+        <NuxtLink :to="localePath({ name: 'team-slug', params: { slug: member.slug } })" class="card-interactive group flex h-full gap-6 p-6">
+          <img v-if="member.github && !failedAvatars.has(member.slug)" :src="useAvatarUrl(member.github)" :alt="member.name" width="64" height="64" loading="lazy" decoding="async" class="h-16 w-16 shrink-0 rounded-badge border border-default bg-elevated object-cover" @error="markAvatarFailed(member.slug)" />
+          <div v-else class="flex h-16 w-16 shrink-0 items-center justify-center rounded-badge bg-accent text-xl font-semibold text-action" aria-hidden="true">{{ member.name.slice(0, 1) }}</div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-start justify-between gap-3">
+              <h2 class="card-title group-hover:text-action">{{ member.name }}</h2>
+              <span class="text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-action" aria-hidden="true">→</span>
+            </div>
+            <p class="mt-1 text-sm text-muted">{{ member.role }}</p>
+            <p class="mt-3 text-sm text-secondary">“{{ member.motto }}”</p>
+          </div>
+        </NuxtLink>
+      </li>
+    </ul>
+  </main>
 </template>

@@ -8,14 +8,14 @@
     "conduct": "Code of Conduct"
   },
   "hero": {
-    "title1": "ReCloud Studio",
+    "title1": "Elysola",
     "subtitle": "We build open-source software. Fair, transparent, and community-driven.",
-    "motto": "All code is created equal.",
+    "motto": "All code is created equal",
     "cta": "Explore projects",
     "demo": "Meet the team",
     "slogan0": "We build open-source software.",
     "slogan1": "Fair, transparent, and community-driven.",
-    "slogan2": "All code is created equal.",
+    "slogan2": "All code is created equal",
     "slogan3": "Open Source, Open Future."
   },
   "features": {
@@ -30,6 +30,7 @@
     "noDescription": "No description provided.",
     "empty": "No projects found.",
     "error": "Failed to load projects. Please try again later.",
+    "retry": "Try again",
     "descriptions": {
       "WebHooker": "GitHub webhook → Discord dispatcher. Receives webhook events via Cloudflare Workers, applies filters, and routes formatted messages to Discord channels or threads.",
       "Mailer": "A small Go daemon that periodically checks one or more mailboxes for new email and pushes a notification to Telegram and/or Discord bots.",
@@ -37,9 +38,9 @@
       "x-to-img": "API service that converts X/Twitter tweets to PNG images. Built with Hono + Satori, deployable to Cloudflare Workers / Deno Deploy / Bun.",
       "SleepyXposed": "An Xposed module that monitors foreground app switches on Android devices in real time and syncs them to a Sleepy server for personal online status. Features battery and charging tracking, a configurable server, media status reporting (system hooks / notification listener / dumpsys), and a multi-level logging system.",
       "homepage": "Source code of this very website, built with Nuxt 4 and Tailwind CSS, deployed on Cloudflare Pages.",
-      "docs": "Documentation site for ReCloud Studio, built with MDX, hosting usage guides and developer docs for our projects.",
-      "icon": "ReCloud Studio brand icons, with build scripts that generate SVG and multi-size PNG assets.",
-      "icon-showcase": "ReCloud brand icon showcase site for previewing and grabbing icon assets online.",
+      "docs": "Documentation site for Elysola, built with MDX, hosting usage guides and developer docs for our projects.",
+      "icon": "Elysola brand icons, with build scripts that generate SVG and multi-size PNG assets.",
+      "icon-showcase": "Elysola brand icon showcase site for previewing and grabbing icon assets online.",
       "Backuper": "Backuper is a server backup tool that supports scheduled or manual backups of directories, MySQL, PostgreSQL and other data sources, uploading archives to local storage, remote SSH, or S3-compatible object storage.",
       "Mirror": "Mirror repositories from GitHub to GitLab / Codeberg / CNB."
     }

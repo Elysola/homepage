@@ -5,212 +5,137 @@ const { locale, setLocale } = useI18n()
 const localePath = useLocalePath()
 const colorMode = useColorMode()
 
-const emailLink = `/api/email/${siteConfig.email}`
 const navOpen = ref(false)
-
+const menuButton = ref<HTMLButtonElement | null>(null)
+const mobileNav = ref<HTMLElement | null>(null)
+const emailLink = `/api/email/${siteConfig.email}`
 const localeOptions = [
+  { code: 'zh', name: '简体中文' },
   { code: 'en', name: 'English' },
-    { code: 'zh', name: '简体中文' },
 ]
 
 function onLocaleChange(event: Event) {
-  const newLocale = (event.target as HTMLSelectElement).value as 'en' | 'zh'
-  setLocale(newLocale)
+  setLocale((event.target as HTMLSelectElement).value as 'zh' | 'en')
 }
+
+const navItems = [
+  { path: '/', label: 'nav.home' },
+  { path: '/projects', label: 'nav.projects' },
+  { path: '/team', label: 'nav.team' },
+  { path: '/partners', label: 'nav.partners' },
+  { path: '/conduct', label: 'nav.conduct' },
+]
+
+const isDark = computed(() => colorMode.value === 'dark')
+const themeLabel = computed(() => (isDark.value ? 'Switch to light mode' : 'Switch to dark mode'))
 
 function toggleTheme() {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  colorMode.preference = isDark.value ? 'light' : 'dark'
 }
 
+function closeNav() {
+  navOpen.value = false
+  nextTick(() => menuButton.value?.focus())
+}
+
+watch(navOpen, async (open) => {
+  if (open) {
+    await nextTick()
+    mobileNav.value?.querySelector<HTMLElement>('a, button, select')?.focus()
+  }
+})
+
+onMounted(() => {
+  const onKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape' && navOpen.value) closeNav()
+  }
+  window.addEventListener('keydown', onKeydown)
+  onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
+})
+
 useHead(() => ({
-  meta: [
-    { property: 'og:locale', content: locale.value === 'en' ? 'en_US' : 'zh_CN' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'ReCloud Studio',
-        url: 'https://worldexecute.me',
-        description: 'We build open-source software. Fair, transparent, and community-driven.',
-        logo: 'https://worldexecute.me/favicon.png',
-        sameAs: [
-          'https://github.com/recloudstudio',
-        ],
-      }),
-    },
-  ],
+  meta: [{ property: 'og:locale', content: locale.value === 'en' ? 'en_US' : 'zh_CN' }],
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': 'https://elysola.org/#organization',
+      name: 'Elysola',
+      url: 'https://elysola.org',
+      description: siteConfig.description,
+      logo: 'https://elysola.org/favicon.png',
+      sameAs: ['https://github.com/Elysola', 'https://x.com/ElysolaOrg'],
+    }),
+  }],
 }))
 </script>
 
 <template>
-  <div class="relative min-h-screen overflow-hidden bg-zinc-50 font-sans text-zinc-900 dark:bg-[#0a0a12] dark:text-white">
-    <div class="pointer-events-none fixed inset-0 z-0">
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-[length:64px_64px] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]" />
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-white dark:via-[#0a0a12]/80 dark:to-[#0a0a12]" />
-      <div class="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-teal-500/10 blur-[128px]" />
-      <div class="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-amber-500/10 blur-[128px]" />
-    </div>
+  <div class="min-h-screen overflow-x-hidden bg-canvas font-sans text-secondary">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-control focus:bg-action focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-on-action">Skip to content</a>
 
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:left-4 focus:top-4 focus:rounded-full focus:bg-teal-500 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-zinc-950">
-      Skip to content
-    </a>
+    <header class="sticky top-0 z-30 border-b border-default bg-canvas">
+      <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8" aria-label="Main">
+        <NuxtLink :to="localePath('/')" class="flex items-center gap-2 rounded-control">
+          <AppLogo class="h-8 w-8" />
+          <span class="text-base font-bold text-primary">Elysola</span>
+        </NuxtLink>
 
-    <nav class="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-      <div class="flex items-center gap-2">
-        <AppLogo class="h-8 w-8" />
-        <NuxtLink :to="localePath('/')" class="text-lg font-bold tracking-tight">ReCloud <span class="text-teal-500 dark:text-teal-400">Studio</span></NuxtLink>
-      </div>
+        <div class="hidden items-center gap-1 md:flex">
+          <NuxtLink v-for="item in navItems" :key="item.path" :to="localePath(item.path)" class="nav-link">{{ $t(item.label) }}</NuxtLink>
+        </div>
 
-      <div class="hidden items-center gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-400 md:flex">
-        <NuxtLink :to="localePath('/')" class="transition-colors hover:text-zinc-900 dark:hover:text-white">{{ $t('nav.home') }}</NuxtLink>
-        <NuxtLink :to="localePath('/projects')" class="transition-colors hover:text-zinc-900 dark:hover:text-white">{{ $t('nav.projects') }}</NuxtLink>
-        <NuxtLink :to="localePath('/team')" class="transition-colors hover:text-zinc-900 dark:hover:text-white">{{ $t('nav.team') }}</NuxtLink>
-        <NuxtLink :to="localePath('/partners')" class="transition-colors hover:text-zinc-900 dark:hover:text-white">{{ $t('nav.partners') }}</NuxtLink>
-        <NuxtLink :to="localePath('/conduct')" class="transition-colors hover:text-zinc-900 dark:hover:text-white">{{ $t('nav.conduct') }}</NuxtLink>
-        <a :href="emailLink" class="rounded-full border border-zinc-300 px-5 py-2 transition-colors hover:border-teal-500 hover:text-teal-600 dark:border-zinc-700 dark:hover:border-teal-500/50 dark:hover:text-white">
-          {{ $t('nav.contact') }}
-        </a>
-        <button
-          class="rounded-full p-2 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
-          :aria-label="colorMode.value === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
-          :title="colorMode.value === 'dark' ? 'Switch to light' : 'Switch to dark'"
-          @click="toggleTheme"
-        >
-          <svg v-if="colorMode.value === 'dark'" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-          </svg>
-          <svg v-else class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-          </svg>
-        </button>
-        <select
-          :value="locale"
-          aria-label="Switch language"
-          class="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-xs text-zinc-600 outline-none transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-600"
-          @change="onLocaleChange"
-        >
-          <option
-            v-for="loc in localeOptions"
-            :key="loc.code"
-            :value="loc.code"
-            class="bg-white dark:bg-zinc-900"
-          >
-            {{ loc.name }}
-          </option>
-        </select>
-      </div>
-
-      <button
-        class="flex items-center rounded-full p-2 transition-colors hover:bg-zinc-200 md:hidden dark:hover:bg-zinc-800"
-        aria-label="Toggle navigation menu"
-        @click="navOpen = !navOpen"
-      >
-        <svg v-if="!navOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-        <svg v-else class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </nav>
-
-    <div v-if="navOpen" class="relative z-10 border-t border-zinc-200 bg-zinc-50 px-6 pb-6 md:hidden dark:border-zinc-900 dark:bg-[#0a0a12]">
-      <div class="mx-auto flex max-w-6xl flex-col gap-4 pt-4 text-sm font-medium text-zinc-600 dark:text-zinc-400">
-        <NuxtLink :to="localePath('/')" class="transition-colors hover:text-zinc-900 dark:hover:text-white" @click="navOpen = false">{{ $t('nav.home') }}</NuxtLink>
-        <NuxtLink :to="localePath('/projects')" class="transition-colors hover:text-zinc-900 dark:hover:text-white" @click="navOpen = false">{{ $t('nav.projects') }}</NuxtLink>
-        <NuxtLink :to="localePath('/team')" class="transition-colors hover:text-zinc-900 dark:hover:text-white" @click="navOpen = false">{{ $t('nav.team') }}</NuxtLink>
-        <NuxtLink :to="localePath('/partners')" class="transition-colors hover:text-zinc-900 dark:hover:text-white" @click="navOpen = false">{{ $t('nav.partners') }}</NuxtLink>
-        <NuxtLink :to="localePath('/conduct')" class="transition-colors hover:text-zinc-900 dark:hover:text-white" @click="navOpen = false">{{ $t('nav.conduct') }}</NuxtLink>
-        <a :href="emailLink" class="inline-flex items-center self-start rounded-full border border-zinc-300 px-5 py-2 transition-colors hover:border-teal-500 hover:text-teal-600 dark:border-zinc-700 dark:hover:border-teal-500/50 dark:hover:text-white" @click="navOpen = false">
-          {{ $t('nav.contact') }}
-        </a>
-        <div class="flex items-center gap-4 pt-2">
-          <button
-            class="rounded-full p-2 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
-            :aria-label="colorMode.value === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
-            :title="colorMode.value === 'dark' ? 'Switch to light' : 'Switch to dark'"
-            @click="toggleTheme"
-          >
-            <svg v-if="colorMode.value === 'dark'" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-            </svg>
-            <svg v-else class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-            </svg>
+        <div class="hidden items-center gap-2 md:flex">
+          <button type="button" class="btn-icon" :aria-label="themeLabel" :title="themeLabel" @click="toggleTheme">
+            <svg v-if="isDark" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+            <svg v-else class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
           </button>
-          <select
-            :value="locale"
-            aria-label="Switch language"
-            class="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-xs text-zinc-600 outline-none transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-600"
-            @change="onLocaleChange"
-          >
-            <option
-              v-for="loc in localeOptions"
-              :key="loc.code"
-              :value="loc.code"
-              class="bg-white dark:bg-zinc-900"
-            >
-              {{ loc.name }}
-            </option>
+          <select :value="locale" aria-label="Switch language" class="input" @change="onLocaleChange">
+            <option v-for="loc in localeOptions" :key="loc.code" :value="loc.code">{{ loc.name }}</option>
           </select>
+          <a :href="emailLink" class="btn btn-primary btn-sm">{{ $t('nav.contact') }}</a>
+        </div>
+
+        <button ref="menuButton" type="button" class="btn-icon md:hidden" :aria-expanded="navOpen" aria-controls="mobile-nav" aria-label="Toggle navigation menu" @click="navOpen = !navOpen">
+          <svg v-if="!navOpen" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+          <svg v-else class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+        </button>
+      </nav>
+
+      <div v-if="navOpen" id="mobile-nav" ref="mobileNav" class="border-t border-default bg-canvas px-4 pb-4 pt-2 md:hidden">
+        <div class="grid gap-1">
+          <NuxtLink v-for="item in navItems" :key="item.path" :to="localePath(item.path)" class="nav-link py-2 text-base" @click="closeNav">{{ $t(item.label) }}</NuxtLink>
+          <div class="mt-3 flex items-center gap-2 border-t border-default pt-4">
+            <button type="button" class="btn-icon" :aria-label="themeLabel" :title="themeLabel" @click="toggleTheme">
+              <svg v-if="isDark" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+              <svg v-else class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
+            </button>
+            <select :value="locale" aria-label="Switch language" class="input" @change="onLocaleChange">
+              <option v-for="loc in localeOptions" :key="loc.code" :value="loc.code">{{ loc.name }}</option>
+            </select>
+            <a :href="emailLink" class="btn btn-primary btn-sm ml-auto">{{ $t('nav.contact') }}</a>
+          </div>
         </div>
       </div>
+    </header>
+
+    <div id="main-content" class="min-h-[calc(100vh-4rem)]">
+      <NuxtPage />
     </div>
 
-    <NuxtPage id="main-content" />
-
-    <footer class="relative z-10 border-t border-zinc-200 px-6 py-12 dark:border-zinc-900">
-      <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 sm:flex-row sm:justify-between">
-        <div class="text-xs text-zinc-500 dark:text-zinc-700">
-          &copy; {{ new Date().getFullYear() }} ReCloud Studio. {{ $t('footer.copyright') }}
+    <footer class="border-t border-default bg-muted">
+      <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:grid-cols-[1fr_auto] sm:items-end sm:px-6 lg:px-8">
+        <div>
+          <div class="flex items-center gap-2"><AppLogo class="h-6 w-6" /><span class="text-sm font-bold text-primary">Elysola</span></div>
+          <p class="mt-3 max-w-md text-sm text-muted">{{ $t('hero.subtitle') }}</p>
+          <p class="mt-4 text-xs text-muted">© {{ new Date().getFullYear() }} Elysola. {{ $t('footer.copyright') }}</p>
         </div>
-        <div class="flex items-center gap-6">
-          <a
-            href="https://github.com/recloudstudio"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-white"
-            aria-label="GitHub"
-          >
-            <IconGithub />
-            {{ $t('social.github') }}
-          </a>
-          <a
-            v-if="siteConfig.social.twitter"
-            :href="`https://x.com/${siteConfig.social.twitter}`"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-white"
-            aria-label="X"
-          >
-            <IconTwitter />
-            {{ $t('social.x') }}
-          </a>
-          <a
-            v-if="siteConfig.social.telegram"
-            :href="`https://t.me/${siteConfig.social.telegram}`"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-white"
-            aria-label="Telegram"
-          >
-            <IconTelegram />
-            {{ $t('social.telegram') }}
-          </a>
-          <a
-            v-if="siteConfig.social.discord"
-            :href="`https://discord.gg/${siteConfig.social.discord}`"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-white"
-            aria-label="Discord"
-          >
-            <IconDiscord />
-            {{ $t('social.discord') }}
-          </a>
+        <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium">
+          <a href="https://github.com/elysola" target="_blank" rel="noopener noreferrer" class="footer-link"><IconGithub class="h-4 w-4" /> GitHub</a>
+          <a v-if="siteConfig.social.twitter" :href="`https://x.com/${siteConfig.social.twitter}`" target="_blank" rel="noopener noreferrer" class="footer-link"><IconTwitter class="h-4 w-4" /> X</a>
+          <a v-if="siteConfig.social.telegram" :href="`https://t.me/${siteConfig.social.telegram}`" target="_blank" rel="noopener noreferrer" class="footer-link"><IconTelegram class="h-4 w-4" /> Telegram</a>
+          <a v-if="siteConfig.social.discord" :href="`https://discord.gg/${siteConfig.social.discord}`" target="_blank" rel="noopener noreferrer" class="footer-link"><IconDiscord class="h-4 w-4" /> Discord</a>
         </div>
       </div>
     </footer>
@@ -218,47 +143,9 @@ useHead(() => ({
 </template>
 
 <style>
-:root {
-  scroll-behavior: smooth;
-}
-
-::selection {
-  background-color: rgba(20, 184, 166, 0.25);
-  color: inherit;
-}
-
-.dark ::selection {
-  background-color: rgba(20, 184, 166, 0.35);
-}
-
-*:focus-visible {
-  outline: 2px solid rgb(20 184 166);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.page-enter-from {
-  opacity: 0;
-  transform: translateY(12px);
-}
-
-.page-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+.nav-link { @apply rounded-control px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-elevated hover:text-primary; }
+.nav-link.router-link-exact-active { @apply bg-accent text-action; }
+.footer-link { @apply inline-flex items-center gap-1.5 rounded-control text-muted transition-colors hover:text-action; }
+.page-enter-active, .page-leave-active { transition: opacity .15s ease; }
+.page-enter-from, .page-leave-to { opacity: 0; }
 </style>

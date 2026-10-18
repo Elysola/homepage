@@ -8,12 +8,12 @@
     "conduct": "成员守则"
   },
   "hero": {
-    "title1": "ReCloud Studio",
+    "title1": "Elysola",
     "subtitle": "我们打造开源软件。公平、透明、社区驱动。",
-    "motto": "代码皆平等。",
+    "motto": "代码皆平等",
     "cta": "探索项目",
     "demo": "成员列表",
-    "slogan0": "代码皆平等。"
+    "slogan0": "代码皆平等"
   },
   "features": {
     "oss": "完全开源",
@@ -27,6 +27,7 @@
     "noDescription": "暂无描述",
     "empty": "暂无项目",
     "error": "项目加载失败，请稍后重试。",
+    "retry": "重新加载",
     "descriptions": {
       "WebHooker": "GitHub webhook → Discord 分发器。通过 Cloudflare Workers 接收 webhook 事件，应用过滤规则，并将格式化消息路由到 Discord 频道或线程。",
       "Mailer": "一个小巧的 Go 守护进程，定期检查一个或多个邮箱的新邮件，并通过 Telegram 和/或 Discord Bot 推送通知。",
@@ -34,9 +35,9 @@
       "x-to-img": "将 X/Twitter 推文转换为 PNG 图片的 API 服务。基于 Hono + Satori 构建，支持部署到 Cloudflare Workers / Deno Deploy / Bun。",
       "SleepyXposed": "Xposed 模块，用于实时监控 Android 设备的前台应用切换并同步到 Sleepy 服务器，展示个人在线状态。支持电量与充电状态追踪、自定义服务器、媒体状态上报（系统钩子/通知监听/Dumpsys）及多级日志。",
       "homepage": "本站源码，基于 Nuxt 4 与 Tailwind CSS 构建，部署于 Cloudflare Pages。",
-      "docs": "ReCloud Studio 文档站点，基于 MDX 构建，集中维护各项目的使用说明与开发文档。",
-      "icon": "ReCloud Studio 品牌图标资源，通过脚本生成 SVG 与多种尺寸的 PNG。",
-      "icon-showcase": "ReCloud 品牌图标在线展示站点，便于预览与获取图标资源。",
+      "docs": "Elysola 文档站点，基于 MDX 构建，集中维护各项目的使用说明与开发文档。",
+      "icon": "Elysola 品牌图标资源，通过脚本生成 SVG 与多种尺寸的 PNG。",
+      "icon-showcase": "Elysola 品牌图标在线展示站点，便于预览与获取图标资源。",
       "Backuper": "Backuper 是一个面向服务器的备份工具，支持定时或手动备份目录、MySQL、PostgreSQL 等数据源，并将归档上传至本地、SSH 远程或 S3 兼容对象存储。",
       "Mirror": "将 GitHub 仓库镜像同步至 GitLab / Codeberg / CNB 等平台。"
     }

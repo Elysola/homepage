@@ -1,76 +1,68 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
+const { t } = useI18n()
 
-useHead({
-  title: 'ReCloud Studio',
+usePageSeo({
+  title: 'Elysola',
+  description: 'We build open-source software. Fair, transparent, and community-driven.',
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Elysola',
+    url: 'https://elysola.org',
+    description: 'We build open-source software. Fair, transparent, and community-driven.',
+    publisher: { '@id': 'https://elysola.org/#organization' },
+  },
 })
 
-defineOgImage('OgImageDefault.takumi', {
-  title: 'ReCloud Studio',
-  fonts: ogFonts(),
+defineOgImage('Default.takumi', {
+  title: 'Elysola',
 })
+
+const principles = computed(() => [
+  t('features.oss'),
+  t('features.community'),
+  t('features.transparent'),
+  t('features.permissive'),
+])
 </script>
 
 <template>
-  <div>
-    <main
-      class="relative z-10 mx-auto flex min-h-[calc(100vh-5rem)] max-w-6xl flex-col items-center justify-center px-6 pt-24 text-center"
-    >
-      <h1
-        class="max-w-4xl text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl animate-fade-up"
-        style="animation-delay: 0.1s"
-      >
-        <span class="bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-500 bg-clip-text text-transparent dark:from-white dark:via-zinc-200 dark:to-zinc-500">
+  <main>
+    <section class="mx-auto flex min-h-[calc(100vh-4rem)] max-w-7xl items-center justify-center px-4 py-20 sm:px-6 lg:px-8">
+      <div class="max-w-3xl animate-fade-up text-center">
+        <AppLogo class="mx-auto h-16 w-16" />
+        <!-- Hero display type: marketing exception above the page-title scale -->
+        <h1 class="mt-8 text-5xl font-bold tracking-tight text-primary sm:text-6xl">
           {{ $t('hero.title1') }}
-        </span>
-      </h1>
+        </h1>
+        <p class="mt-4 text-2xl font-semibold text-action sm:text-3xl">{{ $t('hero.motto') }}</p>
 
-      <p
-        class="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-500 animate-fade-up"
-        style="animation-delay: 0.2s"
-      >
-        {{ $t('hero.subtitle') }}
-      </p>
+        <p class="mx-auto mt-6 max-w-xl text-lg text-secondary">
+          {{ $t('hero.subtitle') }}
+        </p>
 
-      <p
-        class="mt-6 font-serif text-2xl italic tracking-wide text-teal-500 dark:text-teal-400 animate-fade-up"
-        style="animation-delay: 0.3s"
-      >
-        {{ $t('hero.motto') }}
-      </p>
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <NuxtLink :to="localePath('/projects')" class="btn btn-primary btn-lg group">
+            {{ $t('hero.cta') }}
+            <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </NuxtLink>
+          <NuxtLink :to="localePath('/team')" class="btn btn-secondary btn-lg">
+            {{ $t('hero.demo') }}
+          </NuxtLink>
+        </div>
 
-      <div
-        class="mt-12 flex items-center gap-4 animate-fade-up"
-        style="animation-delay: 0.4s"
-      >
-        <NuxtLink
-          :to="localePath('/projects')"
-          class="group relative inline-flex items-center gap-2.5 rounded-full bg-teal-500 px-8 py-3.5 text-sm font-semibold text-zinc-950 transition-all duration-300 hover:bg-teal-400 hover:shadow-lg hover:shadow-teal-500/25 active:scale-95"
-        >
-          {{ $t('hero.cta') }}
-          <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-          </svg>
-        </NuxtLink>
-        <NuxtLink
-          :to="localePath('/team')"
-          class="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-8 py-3.5 text-sm font-medium text-zinc-600 transition-all duration-300 hover:border-zinc-400 hover:text-zinc-900 active:scale-95 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:text-white"
-        >
-          {{ $t('hero.demo') }}
-        </NuxtLink>
+        <ul class="mt-12 flex flex-wrap justify-center gap-x-6 gap-y-3 border-t border-default pt-6">
+          <li v-for="principle in principles" :key="principle" class="inline-flex items-center gap-2 text-sm font-medium text-muted">
+            <svg class="h-4 w-4 text-action" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="m3.25 8.1 2.8 2.75 6.7-6.3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" />
+            </svg>
+            {{ principle }}
+          </li>
+        </ul>
       </div>
-
-      <div class="mt-20 flex flex-wrap items-center justify-center gap-3">
-        <span
-          v-for="(label, j) in [$t('features.oss'), $t('features.community'), $t('features.transparent'), $t('features.permissive')]"
-          :key="j"
-          class="animate-fade-up rounded-full border border-zinc-200 px-4 py-1.5 text-xs text-zinc-600 transition-colors duration-300 hover:border-teal-300 hover:text-teal-600 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-teal-700 dark:hover:text-teal-400"
-          :style="{ animationDelay: `${0.5 + j * 0.08}s` }"
-        >
-          {{ label }}
-        </span>
-      </div>
-    </main>
-  </div>
+    </section>
+  </main>
 </template>
-

@@ -1,0 +1,234 @@
+/*
+ * Elysola Studio Token contract
+ * https://docs.elysola.org/design-system/tokens
+ *
+ * Raw values are defined ONLY here. Pages and components must consume the
+ * semantic Tailwind utilities mapped in tailwind.config.ts (bg-canvas,
+ * text-primary, border-default, rounded-control, ...) — never raw hex values.
+ */
+@import '@fontsource-variable/plus-jakarta-sans';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand scale (brand/design) — gradients and brand marks only */
+    --brand-50: #c8e0fd;
+    --brand-100: #9bc5fe;
+    --brand-200: #70acfe;
+    --brand-300: #417bdf;
+    --brand-600: #3069c9;
+    --brand-700: #1e63ce;
+
+    /* Color — Light */
+    --studio-color-bg-canvas: #ffffff;
+    --studio-color-bg-surface: #ffffff;
+    --studio-color-bg-muted: #f8fafc;
+    --studio-color-bg-elevated: #f1f5f9;
+    --studio-color-text-primary: #0f172a;
+    --studio-color-text-secondary: #334155;
+    --studio-color-text-muted: #64748b;
+    --studio-color-border-default: #e2e8f0;
+    --studio-color-action-primary: #2563eb;
+    --studio-color-action-primary-hover: #1d4ed8;
+    --studio-color-on-action: #ffffff;
+    --studio-color-status-success: #059669;
+    --studio-color-status-warning: #d97706;
+    --studio-color-status-danger: #dc2626;
+    --studio-color-focus-ring: #2563eb;
+    /* Product-level token: soft accent background for active/selected states.
+       Derived from brand --surface-soft. Text on it must use action-primary. */
+    --studio-color-bg-accent: #f4f8fe;
+
+    /* Typography */
+    --studio-font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', 'Segoe UI', -apple-system,
+      'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Source Han Sans SC', 'Noto Sans CJK SC',
+      sans-serif;
+    --studio-font-mono: 'Maple Mono NF CN', 'JetBrains Mono', 'Sarasa Mono CL', 'Noto Sans Mono CJK SC',
+      ui-monospace, monospace;
+
+    /* Radius */
+    --studio-radius-control: 0.5rem;
+    --studio-radius-surface: 0.75rem;
+    --studio-radius-overlay: 1rem;
+    --studio-radius-badge: 9999px;
+
+    /* Control heights */
+    --studio-control-height-sm: 2rem;
+    --studio-control-height-md: 2.5rem;
+    --studio-control-height-lg: 2.75rem;
+
+    /* Elevation */
+    --studio-shadow-surface: none;
+    --studio-shadow-overlay: 0 4px 10px rgb(15 23 42 / 0.1), 0 2px 4px rgb(15 23 42 / 0.05);
+    --studio-shadow-dialog: 0 16px 32px rgb(15 23 42 / 0.14), 0 6px 12px rgb(15 23 42 / 0.08);
+
+    color-scheme: light;
+  }
+
+  .dark {
+    --studio-color-bg-canvas: #090e17;
+    --studio-color-bg-surface: #0f172a;
+    --studio-color-bg-muted: #0f172a;
+    --studio-color-bg-elevated: #1e293b;
+    --studio-color-text-primary: #f8fafc;
+    --studio-color-text-secondary: #e2e8f0;
+    --studio-color-text-muted: #94a3b8;
+    --studio-color-border-default: #1e293b;
+    --studio-color-action-primary: #70acfe;
+    --studio-color-action-primary-hover: #9bc5fe;
+    --studio-color-on-action: #090e17;
+    --studio-color-status-success: #34d399;
+    --studio-color-status-warning: #fbbf24;
+    --studio-color-status-danger: #f87171;
+    --studio-color-focus-ring: #70acfe;
+    --studio-color-bg-accent: #70acfe1a;
+
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-base text-secondary;
+  }
+
+  ::selection {
+    background: var(--studio-color-bg-accent);
+    color: var(--studio-color-text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--studio-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Shared product primitives (until Elysola UI is adopted). */
+@layer components {
+  /* Page header: page title 1.875rem/2.25rem/700, summary as body text */
+  .page-header {
+    @apply border-b border-default pb-8;
+  }
+  .page-eyebrow {
+    @apply font-mono text-xs font-medium uppercase tracking-wider text-muted;
+  }
+  .page-title {
+    @apply mt-2 text-3xl font-bold tracking-tight text-primary;
+  }
+  .page-summary {
+    @apply mt-3 max-w-2xl text-base text-secondary;
+  }
+
+  /* Section title: 1.25rem/1.75rem/600 */
+  .section-title {
+    @apply text-xl font-semibold text-primary;
+  }
+
+  /* Surface (Card / Panel): container radius, border, no shadow */
+  .card {
+    @apply rounded-surface border border-default bg-surface;
+  }
+  .card-interactive {
+    @apply card transition-colors duration-150 hover:border-action hover:bg-muted;
+  }
+  .card-title {
+    @apply text-base font-semibold text-primary;
+  }
+
+  /* Buttons: control radius, md height by default */
+  .btn {
+    @apply inline-flex h-control-md items-center justify-center gap-2 whitespace-nowrap rounded-control px-4 text-sm font-semibold transition-colors duration-150 disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-sm {
+    @apply h-control-sm px-3;
+  }
+  .btn-lg {
+    @apply h-control-lg px-5 text-base;
+  }
+  .btn-primary {
+    @apply bg-action text-on-action hover:bg-action-hover;
+  }
+  .btn-secondary {
+    @apply border border-default bg-surface text-primary hover:bg-elevated;
+  }
+  .btn-ghost {
+    @apply text-secondary hover:bg-elevated hover:text-primary;
+  }
+  .btn-icon {
+    @apply btn btn-ghost w-control-sm px-0 h-control-sm;
+  }
+
+  /* Select / input */
+  .input {
+    @apply h-control-sm rounded-control border border-default bg-surface px-2 text-sm text-secondary outline-none transition-colors hover:bg-muted focus-visible:border-focus;
+  }
+
+  /* Badge / tag: full radius, label typography (0.75rem/1rem/500) */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-badge bg-elevated px-2 py-0.5 text-xs font-medium text-secondary;
+  }
+  .badge-accent {
+    @apply bg-accent text-action;
+  }
+
+  /* Text link */
+  .link {
+    @apply font-medium text-action underline-offset-4 hover:text-action-hover hover:underline;
+  }
+
+  .empty-state {
+    @apply flex min-h-64 flex-col items-center justify-center gap-3 rounded-surface border border-dashed border-default p-6 text-center text-sm text-muted;
+  }
+
+  /* Long-form Markdown content */
+  .prose-studio {
+    @apply prose max-w-none;
+    --tw-prose-body: var(--studio-color-text-secondary);
+    --tw-prose-headings: var(--studio-color-text-primary);
+    --tw-prose-lead: var(--studio-color-text-secondary);
+    --tw-prose-links: var(--studio-color-action-primary);
+    --tw-prose-bold: var(--studio-color-text-primary);
+    --tw-prose-counters: var(--studio-color-text-muted);
+    --tw-prose-bullets: var(--studio-color-text-muted);
+    --tw-prose-hr: var(--studio-color-border-default);
+    --tw-prose-quotes: var(--studio-color-text-primary);
+    --tw-prose-quote-borders: var(--studio-color-border-default);
+    --tw-prose-captions: var(--studio-color-text-muted);
+    --tw-prose-code: var(--studio-color-text-primary);
+    --tw-prose-pre-code: var(--studio-color-text-secondary);
+    --tw-prose-pre-bg: var(--studio-color-bg-muted);
+    --tw-prose-th-borders: var(--studio-color-border-default);
+    --tw-prose-td-borders: var(--studio-color-border-default);
+  }
+  .prose-studio :where(h2) {
+    @apply mt-12 border-b border-default pb-3 text-xl font-semibold;
+  }
+  .prose-studio :where(h3) {
+    @apply mt-8 text-base font-semibold;
+  }
+  .prose-studio :where(a) {
+    @apply font-medium no-underline hover:underline;
+  }
+  .prose-studio :where(code) {
+    @apply rounded-control bg-elevated px-1.5 py-0.5 font-mono text-[0.875em] font-medium before:content-none after:content-none;
+  }
+}

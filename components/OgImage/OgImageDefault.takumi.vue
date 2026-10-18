@@ -2,6 +2,7 @@
 defineProps<{
   title?: string
   description?: string
+  // eslint-disable-next-line vue/prop-name-casing -- injected by nuxt-og-image
   _t?: unknown
 }>()
 </script>
@@ -17,8 +18,8 @@ defineProps<{
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(1000px 520px at 85% -10%, rgba(20, 184, 166, 0.18), transparent 60%),
-        linear-gradient(135deg, #0a0a12 0%, #0f172a 100%);
+        radial-gradient(1000px 520px at 85% -10%, rgba(65, 123, 223, 0.22), transparent 60%),
+        linear-gradient(135deg, #0b1220 0%, #14213d 100%);
       font-family: 'Inter', 'Noto Sans SC', sans-serif;
       color: #ffffff;
     "
@@ -31,7 +32,7 @@ defineProps<{
         width: 420px;
         height: 420px;
         border-radius: 9999px;
-        background: radial-gradient(circle, rgba(20, 184, 166, 0.12), transparent 70%);
+        background: radial-gradient(circle, rgba(112, 172, 254, 0.16), transparent 70%);
       "
     />
 
@@ -44,8 +45,8 @@ defineProps<{
           width: 72px;
           height: 72px;
           border-radius: 18px;
-          background: rgba(20, 184, 166, 0.15);
-          border: 1px solid rgba(20, 184, 166, 0.35);
+          background: rgba(65, 123, 223, 0.18);
+          border: 1px solid rgba(112, 172, 254, 0.4);
         "
       >
         <svg
@@ -79,8 +80,8 @@ defineProps<{
           letter-spacing: -0.02em;
         "
       >
-        <span style="color: #ffffff">ReCloud</span>
-        <span style="color: #2dd4bf">Studio</span>
+        <span style="color: #ffffff">Elysola</span>
+        <span style="color: #70acfe">Studio</span>
       </div>
     </div>
 
@@ -109,7 +110,7 @@ defineProps<{
           color: #ffffff;
         "
       >
-        ReCloud Studio
+        Elysola
       </h1>
 
       <p
@@ -129,16 +130,16 @@ defineProps<{
     <div
       style="display: flex; align-items: center; justify-content: space-between; margin-top: auto"
     >
-      <span style="font-size: 26px; letter-spacing: 0.04em; color: #64748b">worldexecute.me</span>
+      <span style="font-size: 26px; letter-spacing: 0.04em; color: #64748b">elysola.org</span>
       <div style="display: flex; gap: 10px">
         <span
           style="
             padding: 8px 16px;
             border-radius: 9999px;
             font-size: 20px;
-            color: #2dd4bf;
-            background: rgba(20, 184, 166, 0.12);
-            border: 1px solid rgba(20, 184, 166, 0.25);
+            color: #9bc5fe;
+            background: rgba(65, 123, 223, 0.16);
+            border: 1px solid rgba(112, 172, 254, 0.3);
           "
           >Open Source</span
         >
