@@ -39,11 +39,13 @@ test('dark mode remains readable', async ({ page }) => {
 })
 
 test('homepage visual baseline', async ({ page }) => {
+  test.skip(!process.env.VISUAL_REGRESSION, 'Set VISUAL_REGRESSION=true to run screenshot baselines')
   await page.goto('/')
   await expect(page).toHaveScreenshot('homepage.png', { fullPage: true, animations: 'disabled' })
 })
 
 test('mobile menu visual baseline', async ({ page }) => {
+  test.skip(!process.env.VISUAL_REGRESSION, 'Set VISUAL_REGRESSION=true to run screenshot baselines')
   await page.setViewportSize({ width: 320, height: 720 })
   await page.goto('/')
   await page.getByRole('button', { name: 'Toggle navigation menu' }).click()
