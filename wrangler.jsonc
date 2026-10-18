@@ -1,14 +1,7 @@
 {
   "name": "homepage",
   "account_id": "d157d30ef8fd945995f22bf99c5c67b9",
-  "main": ".output/server/index.mjs",
   "compatibility_date": "2026-08-04",
   "compatibility_flags": ["nodejs_compat"],
-  "build": {
-    "command": "bun run build"
-  },
-  "assets": {
-    "directory": ".output/public",
-    "binding": "ASSET_CONTENTS"
-  }
+  "pages_build_output_dir": "dist"
 }
