@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  compatibilityDate: '2026-06-20',
+  compatibilityDate: '2026-06-24',
   site: {
     url: 'https://elysola.org',
   },
