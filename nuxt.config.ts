@@ -1,27 +1,30 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-06-20',
+  site: {
+    url: 'https://elysola.org',
+  },
   app: {
     pageTransition: {
       name: 'page',
       mode: 'out-in',
     },
     head: {
-      title: 'ReCloud Studio',
+      title: 'Elysola',
       meta: [
         {
           name: 'description',
           content: 'We build open-source software. Fair, transparent, and community-driven.',
         },
-        { property: 'og:title', content: 'ReCloud Studio' },
+        { property: 'og:title', content: 'Elysola' },
         {
           property: 'og:description',
           content: 'We build open-source software. Fair, transparent, and community-driven.',
         },
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://worldexecute.me' },
+        { property: 'og:url', content: 'https://elysola.org' },
 
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'ReCloud Studio' },
+        { name: 'twitter:title', content: 'Elysola' },
         {
           name: 'twitter:description',
           content: 'We build open-source software. Fair, transparent, and community-driven.',
@@ -31,6 +34,7 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' },
         { rel: 'apple-touch-icon', href: '/favicon.png' },
+        { rel: 'stylesheet', href: '/fonts/maple/main.css' },
       ],
 
     },
@@ -41,12 +45,10 @@ export default defineNuxtConfig({
     fallback: 'dark',
   },
   modules: [
-    '@nuxtjs/google-fonts',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxt/eslint',
     '@nuxtjs/color-mode',
-    '@nuxt/image',
     '@nuxtjs/sitemap',
     'nuxt-og-image',
   ],
@@ -64,13 +66,6 @@ export default defineNuxtConfig({
       redirectOn: 'root',
     },
   },
-  googleFonts: {
-    families: {
-      Syne: [400, 600, 700],
-      'Noto Sans SC': [400, 500, 700],
-    },
-    display: 'swap',
-  },
   ogImage: {
     zeroRuntime: true,
   },
@@ -79,7 +74,7 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
   },
   nitro: {
-    preset: 'cloudflare-module',
+    preset: 'cloudflare-pages',
     prerender: {
       crawlLinks: true,
       routes: [

@@ -39,7 +39,7 @@ This Code of Conduct applies to all community spaces, including but not limited 
 
 ## Reporting
 
-If you experience or witness a violation of this Code of Conduct, please email [report@worldexecute.me](/api/email/cmVwb3J0QHdvcmxkZXhlY3V0ZS5tZQo=). All reports will be kept confidential, and community maintainers will respond within 72 hours.
+If you experience or witness a violation of this Code of Conduct, please email [report@elysola.org](/api/email/cmVwb3J0QGVseXNvbGEub3JnCg==). All reports will be kept confidential, and community maintainers will respond within 72 hours.
 
 ---
 

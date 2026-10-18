@@ -39,7 +39,7 @@
 
 ## 举报方式
 
-如遭遇或目击违反本守则的行为，请发送邮件至 [report@worldexecute.me](/api/email/cmVwb3J0QHdvcmxkZXhlY3V0ZS5tZQo=)。所有举报信息将严格保密，社区维护者会在 72 小时内做出回应。
+如遭遇或目击违反本守则的行为，请发送邮件至 [report@elysola.org](/api/email/cmVwb3J0QGVseXNvbGEub3JnCg==)。所有举报信息将严格保密，社区维护者会在 72 小时内做出回应。
 
 ---
 

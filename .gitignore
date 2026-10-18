@@ -8,9 +8,21 @@ dist/
 .env.*
 *.log
 
-data/
 .data/
 
 .DS_Store
 *.swp
 *.swo
+
+test-results/
+
+# Local workspace and editor state
+.bash_profile
+.bashrc
+.gitconfig
+.gitmodules
+.idea/
+.profile
+.ripgreprc
+.zprofile
+.zshrc

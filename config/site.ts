@@ -1,13 +1,13 @@
 export const siteConfig = {
-  title: 'ReCloud Studio',
+  title: 'Elysola',
   description: 'We build open-source software. Fair, transparent, and community-driven.',
 
-  email: 'Y29udGFjdEB3b3JsZGV4ZWN1dGUubWU=',
+  email: 'Y29udGFjdEBlbHlzb2xhLm9yZw==',
 
   social: {
-    github: 'recloudstudio',
-    twitter: 'recloudstudio',
-    telegram: 'recloudstudio',
+    github: 'elysola',
+    twitter: 'ElysolaOrg',
+    telegram: 'elysola',
     discord: 'PBxdFTRM8',
   },
 

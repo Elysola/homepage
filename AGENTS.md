@@ -1,4 +1,4 @@
-# ReCloud Studio Homepage
+# Elysola Homepage
 
 Tech stack: **Bun + TypeScript + Nuxt.js + Tailwind CSS**
 Deploy target: **Cloudflare Pages**
