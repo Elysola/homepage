@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Typecheck
+        run: bun run typecheck
+      - name: Lint
+        run: bun run lint
+      - name: Build
+        run: bun run build
+      - name: Start preview server
+        run: |
+          bun run preview --host 127.0.0.1 --port 4173 \
+            > /tmp/elysola-preview.log 2>&1 &
+      - name: Wait for preview
+        run: |
+          attempts=0
+          until curl --fail --silent http://127.0.0.1:4173 >/dev/null; do
+            attempts=$((attempts + 1))
+            [ "$attempts" -ge 30 ] && exit 1
+            sleep 2
+          done
+      - name: Smoke test
+        run: BASE_URL=http://127.0.0.1:4173 bun run test:smoke
+      - name: Install Playwright browser
+        run: bunx playwright install --with-deps chromium
+      - name: E2E test
+        run: BASE_URL=http://127.0.0.1:4173 bun run test:e2e
