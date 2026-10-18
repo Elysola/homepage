@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   try {
     const res = await fetch(url, {
       redirect: 'follow',
-      headers: { 'User-Agent': 'ReCloudStudio/1.0' },
+      headers: { 'User-Agent': 'Elysola/1.0' },
     })
     if (!res.ok) throw new Error(`GitHub returned ${res.status}`)
     for (const [key, value] of res.headers.entries()) {

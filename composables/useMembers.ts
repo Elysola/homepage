@@ -1,4 +1,5 @@
 import { marked } from 'marked'
+import DOMPurify from 'isomorphic-dompurify'
 import { memberSocials } from '~/config/members'
 
 export interface MemberLocalized {
@@ -53,7 +54,10 @@ function loadMembers(lang: string) {
         name: data.name || slug,
         role: data.role || '',
         motto: data.motto || '',
-        bio: marked.parse(content || '') as string,
+        bio: DOMPurify.sanitize(marked.parse(content || '') as string, {
+          ALLOWED_TAGS: ['a', 'blockquote', 'br', 'code', 'em', 'h1', 'h2', 'h3', 'h4', 'hr', 'li', 'ol', 'p', 'pre', 'strong', 'ul'],
+          ALLOWED_ATTR: ['href', 'rel', 'target'],
+        }).replaceAll('<a ', '<a target="_blank" rel="noopener noreferrer" '),
         ...(memberSocials[slug] ?? {}),
       }
     })
