@@ -9,6 +9,6 @@
   },
   "assets": {
     "directory": ".output/public",
-    "binding": "ASSETS"
+    "binding": "ASSET_CONTENTS"
   }
 }

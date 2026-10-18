@@ -12,7 +12,7 @@
     "typecheck": "nuxt prepare && vue-tsc --noEmit",
     "test:smoke": "node tests/smoke.mjs",
     "test:e2e": "playwright test",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler pages deploy dist --project-name homepage"
   },
   "dependencies": {
     "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
