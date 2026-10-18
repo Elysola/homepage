@@ -69,6 +69,9 @@ export default defineNuxtConfig({
   ogImage: {
     zeroRuntime: true,
   },
+  sitemap: {
+    exclude: ['/api/**'],
+  },
 
   devServer: {
     host: '0.0.0.0',
