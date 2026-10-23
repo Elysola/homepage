@@ -15,6 +15,7 @@ dist/
 *.swo
 
 test-results/
+.cache/
 
 # Local workspace and editor state
 .bash_profile
