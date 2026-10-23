@@ -53,7 +53,8 @@ jobs:
           done
       - name: Smoke test
         run: BASE_URL=http://127.0.0.1:4173 bun run test:smoke
-      - name: Install Playwright browser
-        run: bunx playwright install --with-deps chromium
+      - name: Install Playwright browsers
+        # Desktop projects use Chromium; the iPhone project uses WebKit.
+        run: bunx playwright install --with-deps chromium webkit
       - name: E2E test
         run: BASE_URL=http://127.0.0.1:4173 bun run test:e2e
