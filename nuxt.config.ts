@@ -1,3 +1,5 @@
+import { projectDefinitions } from './config/projects'
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-06-24',
   site: {
@@ -93,6 +95,7 @@ export default defineNuxtConfig({
         '/en/partners',
         '/en/conduct',
         '/en/team/rhencloud',
+        ...projectDefinitions.flatMap(({ slug }) => [`/projects/${slug}`, `/en/projects/${slug}`]),
       ],
     },
   },

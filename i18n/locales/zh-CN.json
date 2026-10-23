@@ -31,6 +31,10 @@
     "empty": "暂无项目",
     "error": "项目加载失败，请稍后重试。",
     "retry": "重新加载",
+    "details": "项目详情",
+    "repository": "查看源码",
+    "website": "访问网站",
+    "technology": "主要技术",
     "descriptions": {
       "WebHooker": "GitHub webhook → Discord 分发器。通过 Cloudflare Workers 接收 webhook 事件，应用过滤规则，并将格式化消息路由到 Discord 频道或线程。",
       "Mailer": "一个小巧的 Go 守护进程，定期检查一个或多个邮箱的新邮件，并通过 Telegram 和/或 Discord Bot 推送通知。",

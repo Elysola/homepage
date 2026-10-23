@@ -34,6 +34,10 @@
     "empty": "No projects found.",
     "error": "Failed to load projects. Please try again later.",
     "retry": "Try again",
+    "details": "Project details",
+    "repository": "View source",
+    "website": "Visit website",
+    "technology": "Primary technology",
     "descriptions": {
       "WebHooker": "GitHub webhook → Discord dispatcher. Receives webhook events via Cloudflare Workers, applies filters, and routes formatted messages to Discord channels or threads.",
       "Mailer": "A small Go daemon that periodically checks one or more mailboxes for new email and pushes a notification to Telegram and/or Discord bots.",

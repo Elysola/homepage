@@ -1,3 +1,26 @@
+export interface ProjectDefinition {
+  slug: string
+  name: string
+  repository: string
+  language: string
+  homepage?: string
+}
+
+// Stable project metadata powers detail pages, internal links, and prerendering.
+export const projectDefinitions: ProjectDefinition[] = [
+  { slug: 'webhooker', name: 'WebHooker', repository: 'https://github.com/Elysola/WebHooker', language: 'TypeScript', homepage: 'https://webhooker.docs.elysola.org/' },
+  { slug: 'mailer', name: 'Mailer', repository: 'https://github.com/Elysola/Mailer', language: 'Go' },
+  { slug: 'sleepyxposed', name: 'SleepyXposed', repository: 'https://github.com/Elysola/SleepyXposed', language: 'Kotlin' },
+  { slug: 'shit-bot', name: 'Shit-Bot', repository: 'https://github.com/Elysola/Shit-Bot', language: 'TypeScript' },
+  { slug: 'x-to-img', name: 'x-to-img', repository: 'https://github.com/Elysola/x-to-img', language: 'TypeScript' },
+  { slug: 'homepage', name: 'homepage', repository: 'https://github.com/Elysola/homepage', language: 'Vue' },
+  { slug: 'docs', name: 'docs', repository: 'https://github.com/Elysola/docs', language: 'MDX', homepage: 'https://docs.elysola.org/' },
+  { slug: 'icon', name: 'icon', repository: 'https://github.com/Elysola/icon', language: 'Python' },
+  { slug: 'icon-showcase', name: 'icon-showcase', repository: 'https://github.com/Elysola/icon-showcase', language: 'Vue', homepage: 'https://icon.elysola.org/' },
+  { slug: 'backuper', name: 'Backuper', repository: 'https://github.com/Elysola/backuper', language: 'Go' },
+  { slug: 'mirror', name: 'Mirror', repository: 'https://github.com/Elysola/mirror', language: 'Go' },
+]
+
 export interface ProjectRecord {
   name: string
   description: string
