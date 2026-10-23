@@ -17,15 +17,16 @@ function repoDescription(repo: Repo) {
 }
 
 usePageSeo({
-  title: t('projects.title'),
-  description: t('projects.subtitle'),
-  jsonLd: {
+  title: computed(() => t('projects.title')),
+  description: computed(() => t('projects.subtitle')),
+  jsonLd: computed(() => ({
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: t('projects.title'),
     description: t('projects.subtitle'),
-    url: 'https://elysola.org/projects',
-  },
+    url: `https://elysola.org${locale.value === 'en' ? '/en' : ''}/projects`,
+    inLanguage: locale.value === 'en' ? 'en-US' : 'zh-CN',
+  })),
 })
 defineOgImage('Default.takumi', { title: t('projects.title', 'en'), description: t('projects.subtitle', 'en') })
 </script>

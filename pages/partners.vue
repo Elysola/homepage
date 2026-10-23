@@ -11,15 +11,16 @@ function partnerDescription(partner: Partner) {
 }
 
 usePageSeo({
-  title: t('partners.title'),
-  description: t('partners.subtitle'),
-  jsonLd: {
+  title: computed(() => t('partners.title')),
+  description: computed(() => t('partners.subtitle')),
+  jsonLd: computed(() => ({
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: t('partners.title'),
     description: t('partners.subtitle'),
-    url: 'https://elysola.org/partners',
-  },
+    url: `https://elysola.org${locale.value === 'en' ? '/en' : ''}/partners`,
+    inLanguage: locale.value === 'en' ? 'en-US' : 'zh-CN',
+  })),
 })
 defineOgImage('Default.takumi', { title: t('partners.title', 'en'), description: t('partners.subtitle', 'en') })
 </script>

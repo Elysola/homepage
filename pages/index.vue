@@ -3,16 +3,17 @@ const localePath = useLocalePath()
 const { t } = useI18n()
 
 usePageSeo({
-  title: 'Elysola',
-  description: 'We build open-source software. Fair, transparent, and community-driven.',
-  jsonLd: {
+  title: computed(() => t('seo.homeTitle')),
+  description: computed(() => t('hero.subtitle')),
+  jsonLd: computed(() => ({
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Elysola',
-    url: 'https://elysola.org',
-    description: 'We build open-source software. Fair, transparent, and community-driven.',
+    url: 'https://elysola.org/',
+    description: t('hero.subtitle'),
+    inLanguage: t('seo.homeTitle').startsWith('Elysola:') ? 'en-US' : 'zh-CN',
     publisher: { '@id': 'https://elysola.org/#organization' },
-  },
+  })),
 })
 
 defineOgImage('Default.takumi', {
@@ -34,7 +35,7 @@ const principles = computed(() => [
         <AppLogo class="mx-auto h-16 w-16" />
         <!-- Hero display type: marketing exception above the page-title scale -->
         <h1 class="mt-8 text-5xl font-bold tracking-tight text-primary sm:text-6xl">
-          {{ $t('hero.title1') }}
+          {{ $t('seo.homeTitle') }}
         </h1>
         <p class="mt-4 text-2xl font-semibold text-action sm:text-3xl">{{ $t('hero.motto') }}</p>
 

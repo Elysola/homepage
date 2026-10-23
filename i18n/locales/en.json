@@ -7,6 +7,9 @@
     "contact": "Contact",
     "conduct": "Code of Conduct"
   },
+  "seo": {
+    "homeTitle": "Elysola: Fair, Transparent, Community-Driven Open Source"
+  },
   "hero": {
     "title1": "Elysola",
     "subtitle": "We build open-source software. Fair, transparent, and community-driven.",

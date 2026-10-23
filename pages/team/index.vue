@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
 const { members } = useMembers()
 const failedAvatars = ref(new Set<string>())
@@ -9,15 +9,16 @@ function markAvatarFailed(slug: string) {
 }
 
 usePageSeo({
-  title: t('team.title'),
-  description: t('team.subtitle'),
-  jsonLd: {
+  title: computed(() => t('team.title')),
+  description: computed(() => t('team.subtitle')),
+  jsonLd: computed(() => ({
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: t('team.title'),
     description: t('team.subtitle'),
-    url: 'https://elysola.org/team',
-  },
+    url: `https://elysola.org${locale.value === 'en' ? '/en' : ''}/team`,
+    inLanguage: locale.value === 'en' ? 'en-US' : 'zh-CN',
+  })),
 })
 defineOgImage('Default.takumi', { title: t('team.title', 'en'), description: t('team.subtitle', 'en') })
 </script>

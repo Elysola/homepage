@@ -7,6 +7,9 @@
     "contact": "联系我们",
     "conduct": "成员守则"
   },
+  "seo": {
+    "homeTitle": "Elysola：公平、透明、社区驱动的开源软件"
+  },
   "hero": {
     "title1": "Elysola",
     "subtitle": "我们打造开源软件。公平、透明、社区驱动。",

@@ -47,10 +47,10 @@ const html = computed(() => {
 })
 
 usePageSeo({
-  title: t('nav.conduct'),
-  description: locale.value.startsWith('zh') ? '我们的社区承诺：开放、友好且公平。' : 'Our commitment to an open, welcoming, and fair community.',
+  title: computed(() => t('nav.conduct')),
+  description: computed(() => locale.value.startsWith('zh') ? '我们的社区承诺：开放、友好且公平。' : 'Our commitment to an open, welcoming, and fair community.'),
   type: 'article',
-  jsonLd: {
+  jsonLd: computed(() => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: t('nav.conduct'),
@@ -58,7 +58,7 @@ usePageSeo({
     author: { '@type': 'Organization', name: 'Elysola' },
     publisher: { '@type': 'Organization', name: 'Elysola', logo: { '@type': 'ImageObject', url: 'https://elysola.org/favicon.png' } },
     mainEntityOfPage: `https://elysola.org${locale.value === 'en' ? '/en/conduct' : '/conduct'}`,
-  },
+  })),
 })
 defineOgImage('Default.takumi', { title: t('nav.conduct', 'en') })
 </script>

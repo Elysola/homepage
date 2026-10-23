@@ -26,8 +26,8 @@ const socialLinks = computed(() => {
 })
 
 usePageSeo({
-  title: member.value?.name ? `${member.value.name} — Elysola` : 'Elysola',
-  description: memberEn.value?.role || member.value?.role || 'Elysola team member',
+  title: computed(() => member.value?.name ? `${member.value.name} — Elysola` : 'Elysola'),
+  description: computed(() => [member.value?.name, member.value?.role, member.value?.motto].filter(Boolean).join(' — ') || 'Elysola team member'),
   type: 'profile',
   jsonLd: {
     '@context': 'https://schema.org',

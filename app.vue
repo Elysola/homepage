@@ -62,10 +62,15 @@ useHead(() => ({
       '@type': 'Organization',
       '@id': 'https://elysola.org/#organization',
       name: 'Elysola',
-      url: 'https://elysola.org',
+      url: 'https://elysola.org/',
       description: siteConfig.description,
-      logo: 'https://elysola.org/favicon.png',
-      sameAs: ['https://github.com/Elysola', 'https://x.com/ElysolaOrg'],
+      logo: { '@type': 'ImageObject', url: 'https://elysola.org/favicon.png' },
+      sameAs: [
+        'https://github.com/elysola',
+        'https://x.com/ElysolaOrg',
+        'https://t.me/ElysolaOrg',
+        'https://discord.gg/PBxdFTRM8',
+      ],
     }),
   }],
 }))
