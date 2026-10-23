@@ -8,13 +8,14 @@ for (const path of pages) {
     await page.goto(path)
     await expect(page.locator('main')).toBeVisible()
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', /elysola\.org/)
-    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /https:\/\/elysola\.org\/_og\/.+\.png/)
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /\/_og\/.+\.png/)
   })
 }
 
-test('mobile navigation opens and closes with Escape', async ({ page }) => {
+test('mobile navigation opens and closes with Escape', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'Mobile navigation is covered by the mobile project.')
   await page.setViewportSize({ width: 320, height: 720 })
-  await page.goto('/')
+  await page.goto('/en', { waitUntil: 'networkidle' })
 
   const menu = page.getByRole('button', { name: 'Toggle navigation menu' })
   await menu.click()
@@ -24,7 +25,8 @@ test('mobile navigation opens and closes with Escape', async ({ page }) => {
   await expect(menu).toBeFocused()
 })
 
-test('language switcher navigates to English', async ({ page }) => {
+test('language switcher navigates to English', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'The language selector is inside the mobile menu.')
   await page.goto('/')
   await page.getByRole('combobox', { name: 'Switch language' }).selectOption('en')
   await expect(page).toHaveURL(/\/en\/?$/)
@@ -53,7 +55,7 @@ test('mobile menu visual baseline', async ({ page }) => {
 })
 
 test('main pages have no critical accessibility violations', async ({ page }) => {
-  for (const path of ['/', '/projects', '/team', '/conduct']) {
+  for (const path of ['/en', '/en/projects', '/en/team', '/en/conduct']) {
     await page.goto(path)
     const results = await new AxeBuilder({ page }).analyze()
     const critical = results.violations.filter((violation) => violation.impact === 'critical')

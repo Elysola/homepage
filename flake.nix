@@ -24,6 +24,7 @@
               bun
               nodejs_22
               wrangler
+              playwright-driver.browsers
               git
               curl
               cacert
@@ -55,10 +56,14 @@
               libxcb
             ];
 
-          # Downloaded Playwright browsers live in the repository cache rather
-          # than an implicit user-global cache. This keeps `nix develop`
-          # sessions and CI-style local runs consistent.
-          PLAYWRIGHT_BROWSERS_PATH = ".cache/ms-playwright";
+          # Keep the test runner and browsers on the same Playwright release.
+          # `playwright-driver.browsers` contains Chromium and WebKit in the
+          # immutable Nix store, so no `playwright install` download is needed.
+          PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+
+          # Nixpkgs packages WebKit for Ubuntu 24.04's Playwright platform.
+          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE = pkgs.lib.optionalString pkgs.stdenv.hostPlatform.isLinux "ubuntu-24.04";
+          __EGL_VENDOR_LIBRARY_FILENAMES = pkgs.lib.optionalString pkgs.stdenv.hostPlatform.isLinux "${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json";
 
           shellHook = ''
             echo "Elysola Homepage — Nix development shell"
@@ -68,7 +73,8 @@
             echo
             echo "First-time setup:"
             echo "  bun install"
-            echo "  bunx playwright install chromium webkit"
+            echo
+            echo "Playwright Chromium and WebKit are provided by Nix."
             echo
             echo "Commands:"
             echo "  bun run dev        — start Nuxt development server"
