@@ -64,7 +64,7 @@ useHead(() => ({
       name: 'Elysola',
       url: 'https://elysola.org/',
       description: siteConfig.description,
-      logo: { '@type': 'ImageObject', url: 'https://elysola.org/favicon.png' },
+      logo: { '@type': 'ImageObject', url: 'https://elysola.org/favicon.svg' },
       sameAs: [
         'https://github.com/elysola',
         'https://x.com/ElysolaOrg',

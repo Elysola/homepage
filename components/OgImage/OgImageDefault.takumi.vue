@@ -49,123 +49,25 @@ defineProps<{
           border: 1px solid rgba(112, 172, 254, 0.4);
         "
       >
-        <svg
-          width="44"
-          height="44"
-          viewBox="0 0 1254 1254"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <defs>
-            <linearGradient id="og-logo-g" gradientUnits="userSpaceOnUse" x1="627" y1="111" x2="627" y2="1105">
-              <stop offset="0%" stop-color="#C8E0FD" />
-              <stop offset="25%" stop-color="#9BC5FE" />
-              <stop offset="50%" stop-color="#70ACFE" />
-              <stop offset="75%" stop-color="#417BDF" />
-              <stop offset="100%" stop-color="#3069C9" />
-            </linearGradient>
-          </defs>
-          <g fill="url(#og-logo-g)">
-            <path d="M 609.80 112.10 c -67.60 5.20 -128.60 42.30 -164.30 100.00 -10.60 17.10 -21.10 41.40 -25.10 57.90 l -1.80 7.50 -19.60 0.10 c -21.40 -0.00 -30.50 1.40 -49.20 7.40 -12.70 4.10 -33.30 14.60 -44.80 22.70 -12.10 8.70 -30.60 27.10 -39.30 39.30 -7.90 11.20 -19.30 33.70 -23.60 46.80 -6.10 18.30 -9.00 42.70 -7.20 59.90 5.50 53.20 34.30 95.80 82.10 121.60 16.20 8.70 33.80 14.90 72.00 25.60 11.80 3.30 26.00 7.70 31.50 9.60 26.80 9.60 52.30 22.20 69.40 34.30 9.70 6.80 10.50 6.80 9.60 -0.60 -1.20 -9.40 -0.70 -38.90 0.90 -50.70 11.10 -83.90 62.80 -157.00 137.60 -194.60 79.00 -39.70 169.40 -34.90 243.20 13.00 17.60 11.30 28.80 14.60 47.10 13.90 13.30 -0.60 22.20 -3.30 32.30 -9.80 14.60 -9.60 25.80 -27.30 29.00 -46.00 8.00 -47.00 -26.50 -103.70 -78.20 -128.60 -10.10 -4.80 -29.20 -10.90 -40.90 -13.00 -12.40 -2.10 -39.10 -2.30 -51.30 -0.20 l -8.20 1.50 -4.60 -8.60 c -30.30 -56.10 -84.90 -96.20 -145.40 -106.60 -8.40 -1.40 -33.10 -3.60 -38.00 -3.40 -1.40 0.10 -7.30 0.60 -13.20 1.00 z" />
-            <path d="M 375.50 631.60 c -29.80 4.50 -49.80 12.20 -70.80 27.10 -18.50 13.10 -37.20 35.40 -48.20 57.30 -5.70 11.30 -12.60 31.80 -15.10 45.00 -2.70 14.30 -2.50 41.90 0.50 56.00 16.60 78.50 77.60 132.40 154.70 136.70 l 11.10 0.60 2.70 6.30 c 3.30 7.50 13.40 25.20 19.60 34.40 26.20 38.90 65.90 71.80 108.70 90.10 75.20 32.30 158.90 26.40 228.80 -16.30 25.30 -15.50 53.80 -41.10 71.00 -64.00 5.10 -6.80 8.50 -10.50 9.50 -10.30 0.80 0.20 7.40 0.90 14.50 1.60 28.80 2.50 56.20 -2.90 82.40 -16.20 36.80 -18.70 64.50 -53.30 74.50 -92.90 7.90 -31.30 1.80 -59.40 -16.90 -78.10 -17.40 -17.50 -41.60 -22.90 -66.20 -14.80 -8.90 2.90 -17.00 8.50 -29.70 20.70 -48.60 46.60 -109.10 70.40 -172.10 67.80 -34.50 -1.40 -63.90 -8.70 -94.00 -23.50 -58.30 -28.70 -99.10 -74.40 -122.50 -137.60 -12.20 -33.00 -26.10 -51.40 -51.70 -68.10 -21.50 -14.20 -45.20 -21.30 -72.80 -21.90 -8.20 -0.20 -16.30 -0.10 -18.00 0.10 z" />
-          </g>
-        </svg>
+        <img src="https://elysola.org/logo.svg" width="44" height="44" alt="Elysola" />
       </div>
-      <div
-        style="
-          display: flex;
-          align-items: baseline;
-          gap: 2px;
-          font-size: 40px;
-          font-weight: 700;
-          letter-spacing: -0.02em;
-        "
-      >
+      <div style="display: flex; align-items: baseline; gap: 2px; font-size: 40px; font-weight: 700; letter-spacing: -0.02em">
         <span style="color: #ffffff">Elysola</span>
         <span style="color: #70acfe">Studio</span>
       </div>
     </div>
 
     <div style="display: flex; flex: 1; flex-direction: column; justify-content: center">
-      <h1
-        v-if="title"
-        style="
-          margin: 0;
-          font-size: 72px;
-          font-weight: 700;
-          line-height: 1.12;
-          letter-spacing: -0.02em;
-          color: #ffffff;
-        "
-      >
+      <h1 style="font-size: 58px; font-weight: 700; color: #ffffff; line-height: 1.2; margin: 0 0 20px">
         {{ title }}
       </h1>
-      <h1
-        v-else
-        style="
-          margin: 0;
-          font-size: 72px;
-          font-weight: 700;
-          line-height: 1.12;
-          letter-spacing: -0.02em;
-          color: #ffffff;
-        "
-      >
-        Elysola
-      </h1>
-
-      <p
-        v-if="description"
-        style="margin-top: 24px; max-width: 92%; font-size: 32px; line-height: 1.45; color: #94a3b8"
-      >
+      <p v-if="description" style="font-size: 28px; color: rgba(255, 255, 255, 0.72); line-height: 1.4; margin: 0">
         {{ description }}
-      </p>
-      <p
-        v-else
-        style="margin-top: 24px; max-width: 92%; font-size: 32px; line-height: 1.45; color: #94a3b8"
-      >
-        We build open-source, transparent, and community-driven software.
       </p>
     </div>
 
-    <div
-      style="display: flex; align-items: center; justify-content: space-between; margin-top: auto"
-    >
-      <span style="font-size: 26px; letter-spacing: 0.04em; color: #64748b">elysola.org</span>
-      <div style="display: flex; gap: 10px">
-        <span
-          style="
-            padding: 8px 16px;
-            border-radius: 9999px;
-            font-size: 20px;
-            color: #9bc5fe;
-            background: rgba(65, 123, 223, 0.16);
-            border: 1px solid rgba(112, 172, 254, 0.3);
-          "
-          >Open Source</span
-        >
-        <span
-          style="
-            padding: 8px 16px;
-            border-radius: 9999px;
-            font-size: 20px;
-            color: #cbd5e1;
-            background: rgba(148, 163, 184, 0.12);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-          "
-          >Transparent</span
-        >
-        <span
-          style="
-            padding: 8px 16px;
-            border-radius: 9999px;
-            font-size: 20px;
-            color: #cbd5e1;
-            background: rgba(148, 163, 184, 0.12);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-          "
-          >Community-driven</span
-        >
-      </div>
+    <div style="display: flex; justify-content: flex-end; margin-top: 40px; font-size: 20px; color: rgba(255, 255, 255, 0.4)">
+      elysola.org
     </div>
   </div>
 </template>
