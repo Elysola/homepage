@@ -34,8 +34,9 @@ export default defineNuxtConfig({
 
       ],
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        { rel: 'apple-touch-icon', href: '/favicon.svg' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/brand/elysola-icon-32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/brand/elysola-icon-16.png' },
+        { rel: 'apple-touch-icon', sizes: '256x256', href: '/brand/apple-touch-icon.png' },
         { rel: 'stylesheet', href: '/fonts/maple/main.css' },
       ],
 

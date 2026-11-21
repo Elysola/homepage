@@ -23,7 +23,7 @@ const err = computed(() => (messages[props.error.statusCode] ?? messages[500])!)
 <template>
   <div class="flex min-h-screen items-center justify-center bg-canvas px-4 font-sans text-secondary">
     <main class="max-w-md text-center">
-      <AppLogo class="mx-auto h-12 w-12" />
+      <AppLogo :size="48" class="mx-auto" />
       <p class="mt-8 font-mono text-sm font-medium text-danger">Error {{ error.statusCode }}</p>
       <h1 class="mt-2 text-3xl font-bold tracking-tight text-primary">{{ err.title }}</h1>
       <p class="mt-3 text-base text-secondary">{{ err.desc }}</p>

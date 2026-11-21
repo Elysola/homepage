@@ -56,7 +56,7 @@ usePageSeo({
     headline: t('nav.conduct'),
     description: locale.value.startsWith('zh') ? '我们的社区承诺：开放、友好且公平。' : 'Our commitment to an open, welcoming, and fair community.',
     author: { '@type': 'Organization', name: 'Elysola' },
-    publisher: { '@type': 'Organization', name: 'Elysola', logo: { '@type': 'ImageObject', url: 'https://elysola.org/favicon.png' } },
+    publisher: { '@type': 'Organization', name: 'Elysola', logo: { '@type': 'ImageObject', url: 'https://elysola.org/brand/apple-touch-icon.png' } },
     mainEntityOfPage: `https://elysola.org${locale.value === 'en' ? '/en/conduct' : '/conduct'}`,
   })),
 })

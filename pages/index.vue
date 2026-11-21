@@ -32,7 +32,7 @@ const principles = computed(() => [
   <main>
     <section class="mx-auto flex min-h-[calc(100vh-4rem)] max-w-7xl items-center justify-center px-4 py-20 sm:px-6 lg:px-8">
       <div class="max-w-3xl animate-fade-up text-center">
-        <AppLogo class="mx-auto h-16 w-16" />
+        <AppLogo :size="64" class="mx-auto" />
         <!-- Hero display type: marketing exception above the page-title scale -->
         <h1 class="mt-8 text-5xl font-bold tracking-tight text-primary sm:text-6xl">
           {{ $t('seo.homeTitle') }}

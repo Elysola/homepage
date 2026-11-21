@@ -49,7 +49,7 @@ defineProps<{
           border: 1px solid rgba(112, 172, 254, 0.4);
         "
       >
-        <img src="https://elysola.org/logo.svg" width="44" height="44" alt="Elysola" />
+        <img src="https://elysola.org/brand/elysola-icon.svg" width="44" height="44" alt="Elysola" />
       </div>
       <div style="display: flex; align-items: baseline; gap: 2px; font-size: 40px; font-weight: 700; letter-spacing: -0.02em">
         <span style="color: #ffffff">Elysola</span>

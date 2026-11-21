@@ -64,7 +64,7 @@ useHead(() => ({
       name: 'Elysola',
       url: 'https://elysola.org/',
       description: siteConfig.description,
-      logo: { '@type': 'ImageObject', url: 'https://elysola.org/favicon.svg' },
+      logo: { '@type': 'ImageObject', url: 'https://elysola.org/brand/elysola-icon-512.png' },
       sameAs: [
         'https://github.com/elysola',
         'https://x.com/ElysolaOrg',
@@ -83,7 +83,7 @@ useHead(() => ({
     <header class="sticky top-0 z-30 border-b border-default bg-canvas">
       <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8" aria-label="Main">
         <NuxtLink :to="localePath('/')" class="flex items-center gap-2 rounded-control">
-          <AppLogo class="h-8 w-8" />
+          <AppLogo :size="32" />
           <span class="text-base font-bold text-primary">Elysola</span>
         </NuxtLink>
 
@@ -132,7 +132,7 @@ useHead(() => ({
     <footer class="border-t border-default bg-muted">
       <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:grid-cols-[1fr_auto] sm:items-end sm:px-6 lg:px-8">
         <div>
-          <div class="flex items-center gap-2"><AppLogo class="h-6 w-6" /><span class="text-sm font-bold text-primary">Elysola</span></div>
+          <div class="flex items-center gap-2"><AppLogo :size="24" /><span class="text-sm font-bold text-primary">Elysola</span></div>
           <p class="mt-3 max-w-md text-sm text-muted">{{ $t('hero.subtitle') }}</p>
           <p class="mt-4 text-xs text-muted">© {{ new Date().getFullYear() }} Elysola. {{ $t('footer.copyright') }}</p>
         </div>
